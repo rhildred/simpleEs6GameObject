@@ -1,11 +1,20 @@
 import readlineSync from 'readline-sync';
-import Game from './Game';
 
-let oGame = new Game();
+import OverUnder from "./OverUnder";
 
-let sInput = readlineSync.question("Type \"quit\" to end ... " + oGame.makeAMove("hello") + " ");
+let sOutput = "";
+let sInput = "";
 
-while("quit" != sInput){
-    let sNewInput = readlineSync.question(oGame.makeAMove(sInput) + " ");
-    sInput = sNewInput;
-}
+let oGame = new OverUnder();
+console.log(oGame.giveInstructions());
+
+
+do{
+    sInput = readlineSync.question(oGame.givePrompt());
+    sOutput = oGame.takeTurn(sInput);
+    console.log(sOutput);
+
+}while(sOutput != "");
+
+console.log(oGame.giveCongratulations());
+
